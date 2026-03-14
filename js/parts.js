@@ -1,37 +1,26 @@
-let parts=
+fetch("data/parts.json")
 
-JSON.parse(localStorage.getItem("parts"))||[]
+.then(res=>res.json())
 
-function addPart(){
+.then(data=>{
 
-let part=document.getElementById("part").value
+let table=document.getElementById("partsTable")
 
-parts.push(part)
+data.forEach(p=>{
 
-localStorage.setItem(
+table.innerHTML+=`
 
-"parts",
+<tr>
 
-JSON.stringify(parts)
+<td>${p.name}</td>
+<td>${p.part_number}</td>
+<td>${p.price} บาท</td>
+<td>${p.stock}</td>
 
-)
+</tr>
 
-render()
-
-}
-
-function render(){
-
-let list=document.getElementById("parts")
-
-list.innerHTML=""
-
-parts.forEach(p=>{
-
-list.innerHTML+=`<li>${p}</li>`
+`
 
 })
 
-}
-
-render()
+})
