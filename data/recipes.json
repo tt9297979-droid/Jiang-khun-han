@@ -1,0 +1,16 @@
+[
+{
+"bike":"Wave 125",
+"piston":"59mm",
+"cam":"Stage2",
+"carb":"28mm",
+"hp":"18hp"
+},
+{
+"bike":"Wave 110",
+"piston":"60mm",
+"cam":"Racing",
+"carb":"30mm",
+"hp":"20hp"
+}
+]
