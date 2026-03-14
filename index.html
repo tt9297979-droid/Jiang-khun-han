@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ช่างเจียง จะเนียว Garage</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:'Kanit',sans-serif;
+background:#0b0b0b;
+color:white;
+}
+
+header{
+background:linear-gradient(90deg,#000,#1a1a1a);
+padding:30px;
+text-align:center;
+border-bottom:2px solid red;
+}
+
+header h1{
+margin:0;
+color:#ff3b3b;
+font-size:32px;
+}
+
+nav{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+background:#111;
+}
+
+nav button{
+background:none;
+border:none;
+color:white;
+padding:14px 20px;
+cursor:pointer;
+font-size:15px;
+}
+
+nav button:hover{
+background:#222;
+color:#ff3b3b;
+}
+
+.section{
+display:none;
+padding:40px;
+max-width:1100px;
+margin:auto;
+}
+
+.active{
+display:block;
+}
+
+.card{
+background:#151515;
+padding:25px;
+border-radius:12px;
+margin-bottom:25px;
+box-shadow:0 0 10px #000;
+}
+
+.hero{
+text-align:center;
+}
+
+.engine{
+width:160px;
+animation:spin 5s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+
+.gallery{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.gallery img{
+width:280px;
+margin:10px;
+border-radius:10px;
+}
+
+.review{
+background:#101010;
+padding:15px;
+margin:10px 0;
+border-radius:8px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:6px 0;
+border-radius:6px;
+border:none;
+}
+
+.btn{
+background:#ff3b3b;
+border:none;
+padding:12px 18px;
+color:white;
+cursor:pointer;
+border-radius:6px;
+}
+
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:10px;
+}
+
+.tool{
+background:#121212;
+padding:12px;
+border-radius:8px;
+}
+
+.fb{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#1877f2;
+padding:16px;
+border-radius:50%;
+font-weight:bold;
+}
+
+a{
+color:white;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>ช่างเจียง จะเนียว Garage</h1>
+<p>ซ่อม • แต่ง • ฟิตเครื่อง • จูนเครื่อง</p>
+
+</header>
+
+<nav>
+
+<button onclick="show('home')">หน้าแรก</button>
+<button onclick="show('wave')">สูตรแต่ง Wave</button>
+<button onclick="show('tools')">เครื่องมือช่าง</button>
+<button onclick="show('dyno')">Dyno</button>
+<button onclick="show('gallery')">ผลงาน</button>
+<button onclick="show('booking')">จองคิว</button>
+<button onclick="show('review')">รีวิว</button>
+<button onclick="show('contact')">ติดต่อ</button>
+
+</nav>
+
+<!-- HOME -->
+
+<div id="home" class="section active">
+
+<div class="card hero">
+
+<img class="engine" src="https://cdn-icons-png.flaticon.com/512/743/743007.png">
+
+<h2>สำนักแต่งรถสายสนาม</h2>
+
+<p>
+รับซ่อมเครื่อง ฟิตเครื่อง แต่งเครื่อง โมดิฟายเครื่อง
+สำหรับสายซิ่งและสายสนาม
+</p>
+
+</div>
+
+</div>
+
+<!-- WAVE -->
+
+<div id="wave" class="section">
+
+<div class="card">
+
+<h2>สูตรแต่ง Wave 110</h2>
+
+<ul>
+<li>ลูกสูบ 59mm</li>
+<li>คาบู 28</li>
+<li>แคมแต่ง</li>
+<li>ท่อสูตร</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>สูตรแต่ง Wave 125</h2>
+
+<ul>
+<li>ลูกสูบ 62mm</li>
+<li>วาล์วใหญ่</li>
+<li>คาบู 30</li>
+<li>แคมสนาม</li>
+</ul>
+
+</div>
+
+</div>
+
+<!-- TOOLS -->
+
+<div id="tools" class="section">
+
+<div class="card">
+
+<h2>คำนวณ CC</h2>
+
+<input id="bore" placeholder="Bore (mm)">
+<input id="stroke" placeholder="Stroke (mm)">
+
+<button class="btn" onclick="calcCC()">คำนวณ</button>
+
+<div id="cc"></div>
+
+</div>
+
+<div class="card">
+
+<h2>เครื่องมือช่าง</h2>
+
+<div class="tools">
+
+<div class="tool">คำนวณ CC</div>
+<div class="tool">คำนวณแรงม้า</div>
+<div class="tool">คำนวณแรงบิด</div>
+<div class="tool">คำนวณรอบเครื่อง</div>
+<div class="tool">คำนวณความเร็วปลาย</div>
+<div class="tool">สูตรคาบู</div>
+<div class="tool">สูตรหัวฉีด</div>
+<div class="tool">Dyno</div>
+<div class="tool">ตารางลูกสูบ</div>
+<div class="tool">ฐานข้อมูล Wave</div>
+<div class="tool">เปรียบเทียบสูตร</div>
+<div class="tool">AI วิเคราะห์สูตร</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DYNO -->
+
+<div id="dyno" class="section">
+
+<div class="card">
+
+<h2>Dyno Graph</h2>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+</div>
+
+<!-- GALLERY -->
+
+<div id="gallery" class="section">
+
+<div class="card">
+
+<h2>ผลงานเครื่องที่ทำ</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9">
+<img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65">
+<img src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BOOKING -->
+
+<div id="booking" class="section">
+
+<div class="card">
+
+<h2>จองคิวซ่อม</h2>
+
+<input id="name" placeholder="ชื่อ">
+<input id="bike" placeholder="รุ่นรถ">
+<input id="problem" placeholder="อาการรถ">
+<input id="date" type="date">
+
+<button class="btn" onclick="sendBooking()">จองคิว</button>
+
+</div>
+
+</div>
+
+<!-- REVIEW -->
+
+<div id="review" class="section">
+
+<div class="card">
+
+<h2>รีวิวลูกค้า</h2>
+
+<div class="review">เครื่องแรงขึ้นมาก ช่างทำละเอียด</div>
+<div class="review">ฟิตเครื่องแล้ววิ่งดีขึ้นมาก</div>
+<div class="review">บริการดี ราคาไม่แรง</div>
+
+</div>
+
+</div>
+
+<!-- CONTACT -->
+
+<div id="contact" class="section">
+
+<div class="card">
+
+<h2>ติดต่อเรา</h2>
+
+<p>ช่องหลัก</p>
+
+<a href="https://www.facebook.com/share/1amDm6LxUw/">
+ช่างเจียง จะเนียว
+</a>
+
+<br><br>
+
+<p>ช่องรอง</p>
+
+<a href="https://www.facebook.com/share/1CLzdS7JkT/">
+วินโมโตเทค ขุนหาญ
+</a>
+
+</div>
+
+</div>
+
+<a class="fb" href="https://www.facebook.com/share/1amDm6LxUw/">
+FB
+</a>
+
+<script>
+
+function show(id){
+
+document.querySelectorAll(".section").forEach(s=>{
+s.classList.remove("active")
+})
+
+document.getElementById(id).classList.add("active")
+
+}
+
+function calcCC(){
+
+let bore=document.getElementById("bore").value
+let stroke=document.getElementById("stroke").value
+
+let cc=Math.PI*(bore/2)*(bore/2)*stroke/1000
+
+document.getElementById("cc").innerHTML="CC = "+cc.toFixed(1)
+
+}
+
+function sendBooking(){
+
+let name=document.getElementById("name").value
+let bike=document.getElementById("bike").value
+let problem=document.getElementById("problem").value
+let date=document.getElementById("date").value
+
+let message="จองคิวซ่อมรถ%0A"+
+"ชื่อ:"+name+"%0A"+
+"รุ่นรถ:"+bike+"%0A"+
+"อาการ:"+problem+"%0A"+
+"วันที่:"+date
+
+let url="https://www.facebook.com/messages/t/?text="+message
+
+window.open(url)
+
+}
+
+const ctx=document.getElementById('chart')
+
+new Chart(ctx,{
+type:'line',
+data:{
+labels:[2000,4000,6000,8000,10000],
+datasets:[{
+label:'Horsepower',
+data:[5,12,18,24,22]
+}]
+}
+})
+
+</script>
+
+</body>
+</html>
